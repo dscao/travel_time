@@ -5,7 +5,7 @@ Github        : https://github.com/dscao
 Description   : 
 Date          : 2023-11-23
 LastEditors   : dscao
-LastEditTime  : 2024-11-28
+LastEditTime  : 2023-11-25
 '''
 """    
 Component to integrate with travel_time.
@@ -434,6 +434,15 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
                 else:
                     _LOGGER.error("配置的平台不支持，请删除集成条目重新配置！")
                     return
-                
+                    
+        if self.way == "0":
+            sw_version = "驾车规划" + sw_version
+        elif self.way == "1":
+            sw_version = "骑行规划" + sw_version
+        elif self.way == "2":
+            sw_version = "步行规划" + sw_version
+        elif self.way == "3":
+            sw_version = "电动车规划" + sw_version
+
         return {"location_key":self.location_key,"devicename":self.devicename,"manufacturer":manufacturer,"device_model":device_model,"sw_version":sw_version,"querytime":self.querytime,"distance":self.distance,"duration":self.duration,"traffic_condition":self.traffic_condition,"attrs":self._attrs}
 
