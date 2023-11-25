@@ -1,0 +1,12 @@
+{
+  "domain": "travel_time",
+  "name": "交通路况",
+  "codeowners": ["@dscao"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/dscao/travel_time",  
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/dscao/travel_time/issues",  
+  "requirements": [],
+  "version": "2023.11.25"
+}
