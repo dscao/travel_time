@@ -1,0 +1,63 @@
+{
+    "config": {
+        "title": "交通路况",
+        "step": {
+            "user": {
+                "title": "交通路况",
+                "description": "如果您需要配置方面的帮助，请查看此处: https://github.com/dscao/travel_time",
+                "data": {
+                    "name": "名称",
+                    "webhost": "API接口平台",
+					"api_key": "开发平台的服务端key",
+                    "private_key": "开发平台的对应私钥，未启用则留空",                   
+					"origin": "出发地的设备或区域",
+					"destination": "目的地的设备或区域"
+                }
+            }
+        },
+        "error": {
+            "communication": "请检查输入值。"
+        },
+        "abort": {
+            "single_instance_allowed": "仅允许单个配置.",
+            "already_configured": "请勿重复配置."
+        }
+    },
+	"options": {
+        "step": {
+            "user":{
+                "data": {
+					"way": "交通方式",
+                    "tactics": "路线偏好(仅对驾车路线规划有效)",
+					"update_interval_seconds": "更新间隔时间(10-3600秒),建议设为90"
+                },
+                "description": "更多可选设置"
+            }
+        }
+    },
+	"selector": {
+		"tactics": {
+			"options": {
+				"laststoptime": "上次停止时间",
+				"parkingtime": "停车时长"
+			}
+		}
+	},
+	"entity": {
+		"sensor": {
+			"baidu_travel_time_Sensor": {
+				"state_attributes": {					
+					"status": {
+					  "name": "当前状态"
+					},
+					"last_update": {
+					  "name": "最后更新"
+					},
+					"querytime": {
+					  "name": "查询时间"
+					}
+			    }
+			}
+		}
+	}
+}
