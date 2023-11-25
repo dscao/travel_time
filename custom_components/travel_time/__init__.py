@@ -335,7 +335,6 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
                         else:
                             self.traffic_condition = "非驾车路线无路况"
                 elif self.webhost == "amap.com":
-                    _LOGGER.error("self.way: %s",self.way)
                     if int(self.way) > 2:
                         self.way = "0"
                     try:
