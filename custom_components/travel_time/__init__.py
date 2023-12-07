@@ -5,7 +5,7 @@ Github        : https://github.com/dscao
 Description   : 
 Date          : 2023-11-23
 LastEditors   : dscao
-LastEditTime  : 2023-11-25
+LastEditTime  : 2024-11-25
 '''
 """    
 Component to integrate with travel_time.
@@ -311,14 +311,14 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
                                 else:
                                     status = 0
                                 if status in TRAFFIC_STATUS:
-                                    traffic_status = TRAFFIC_STATUS[status]
+                                    traffic_status = TRAFFIC_STATUS[status] + "|" + str(float(step[i]['distance'])/1000) + "公里|" + str(int(step[i]['duration'])//60) + "分钟"
                                 else:
-                                    traffic_status  = '未知'
+                                    traffic_status  = '未知' + "|" + str(float(step[i]['distance'])/1000) + "公里|" + str(int(step[i]['duration'])//60) + "分钟"
                                 road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = traffic_status
                         else:
                             for i in range(len(step)):
                                 if step[i].get('duration'):
-                                    status = str(int(step[i]['duration'])//60)
+                                    status = str(int(step[i]['distance'])) + "米|" + str(int(step[i]['duration'])//60) + "分钟"
                                 else:
                                     status = "未知"
                                 road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = status
@@ -356,14 +356,14 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
                         if self.way == '0':
                             for i in range(len(step)):
                                 if step[i].get('tmcs'):
-                                    status = step[i]['tmcs'][0]['status']
+                                    status = step[i]['tmcs'][0]['status'] + "|" + str(float(step[i]['distance'])/1000) + "公里|" + str(int(step[i]['duration'])//60) + "分钟"
                                 else:
-                                    status = "未知"
+                                    status = "未知" + "|" + str(float(step[i]['distance'])/1000) + "公里|" + str(int(step[i]['duration'])//60) + "分钟"
                                 road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = status
                         else:
                             for i in range(len(step)):
                                 if step[i].get('duration'):
-                                    status = str(int(step[i]['duration'])//60)
+                                    status = str(int(step[i]['distance'])) + "米|" + str(int(step[i]['duration'])//60) + "分钟"
                                 else:
                                     status = "未知"
                                 road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = status
@@ -400,21 +400,21 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
                                 else:
                                     status = 0
                                 if status in TRAFFIC_STATUS:
-                                    traffic_status = TRAFFIC_STATUS[status]
+                                    traffic_status = TRAFFIC_STATUS[status] + "|" + str(float(step[i]['distance'])/1000) + "公里"
                                 else:
-                                    traffic_status  = '未知'
+                                    traffic_status  = '未知' + "|" + str(int(step[i]['distance'])) + "米"
                                 road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = traffic_status
                         elif self.way == '3':
                             for i in range(len(step)):
                                 if step[i].get('distance'):
-                                    status = float(step[i]['distance'])/1000
+                                    status = str(float(step[i]['distance'])/1000)+ "公里"
                                 else:
                                     status = '未知'                                
                                 road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = status
                         else:
                             for i in range(len(step)):
-                                if step[i].get('duration'):
-                                    status = str(int(step[i]['duration'])//60)
+                                if step[i].get('distance'):
+                                    status = str(int(step[i]['distance'])) + "米"
                                 else:
                                     status = "未知"
                                 road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = status
@@ -442,6 +442,6 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
             sw_version = "步行规划" + sw_version
         elif self.way == "3":
             sw_version = "电动车规划" + sw_version
-
+            
         return {"location_key":self.location_key,"devicename":self.devicename,"manufacturer":manufacturer,"device_model":device_model,"sw_version":sw_version,"querytime":self.querytime,"distance":self.distance,"duration":self.duration,"traffic_condition":self.traffic_condition,"attrs":self._attrs}
 
