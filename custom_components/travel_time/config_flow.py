@@ -88,7 +88,7 @@ class FlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     def get_qq_directionlite(self, way, tactics, lat_o, lng_o, lat_d, lng_d, api_key, private_key):
         origin = str("{:.6f}".format(lat_o))+','+str("{:.6f}".format(lng_o))
         destination = str("{:.6f}".format(lat_d))+','+str("{:.6f}".format(lng_d))
-        sk = ''
+        sig = ''
         if private_key:
             params = WAY_QQ[way]+'?from='+origin+'&get_speed=1&key='+api_key+'&output=json&policy='+TACTICS_QQ[tactics]+'&to='+destination
             sig = self.tencent_sk(params, private_key)
@@ -159,7 +159,7 @@ class FlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                     title=user_input[CONF_NAME], data=user_input
                 )
             else:
-                self._errors["base"] = "communication"
+                self._errors["base"] = ret.get("message") or ret.get("info") or "communication"
 
             return await self._show_config_form(user_input)
 

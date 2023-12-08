@@ -227,7 +227,7 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
         lng_d, lat_d = wgs84togcj02(lng_d, lat_d)
         origin = str("{:.6f}".format(lat_o))+','+str("{:.6f}".format(lng_o))
         destination = str("{:.6f}".format(lat_d))+','+str("{:.6f}".format(lng_d))
-        sk = ''
+        sig = ''
         if private_key:
             params = WAY_QQ[int(way)]+'?from='+origin+'&get_speed=1&key='+api_key+'&output=json&policy='+TACTICS_QQ[int(tactics)]+'&to='+destination
             sig = self.tencent_sk(params, private_key)
