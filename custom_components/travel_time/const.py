@@ -46,10 +46,11 @@ UNDO_UPDATE_LISTENER = "undo_update_listener"
 
 SENSOR_TYPES = {
     "distance": {
-        "icon": "mdi:clock-time-eight",
+        "icon": "mdi:map-marker-distance",
         "label": "里程",
         "name": "distance",
-        "unit_of_measurement": "公里",
+        "unit_of_measurement": "km",
+        "device_class": "distance"
     },
     "duration": {
         "icon": "mdi:clock-time-eight",
