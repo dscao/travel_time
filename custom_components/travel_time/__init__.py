@@ -304,6 +304,7 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
                         timecost = data['result']['routes'][0]['duration']
                         timecost = str(int(timecost)//60)
                         road_dict = {}
+                        road_dict["number"] = 0
                         if self.way == '0':
                             for i in range(len(step)):
                                 if step[i].get('traffic_condition'):
@@ -355,6 +356,7 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
                             self.distance = float(data['route']['paths'][0]['distance'])/1000
                         timecost = str(int(timecost)//60)
                         road_dict = {}
+                        road_dict["number"] = 0
                         if self.way == '0':
                             for i in range(len(step)):
                                 if step[i].get('tmcs'):
@@ -397,6 +399,7 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
                         timecost = data['result']['routes'][0]['duration']
                         #timecost = str(int(timecost)//60)
                         road_dict = {}
+                        road_dict["number"] = 0
                         if self.way == '0':
                             for i in range(len(step)):
                                 if step[i].get('traffic_condition'):
