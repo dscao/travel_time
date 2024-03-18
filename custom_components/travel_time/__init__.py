@@ -314,14 +314,16 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
                                     traffic_status = TRAFFIC_STATUS[status] + "|" + str(float(step[i]['distance'])/1000) + "公里|" + str(int(step[i]['duration'])//60) + "分钟"
                                 else:
                                     traffic_status  = '未知' + "|" + str(float(step[i]['distance'])/1000) + "公里|" + str(int(step[i]['duration'])//60) + "分钟"
-                                road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = traffic_status
+                                road_dict[str(i+1)] = self.remove_tags(step[i]['instruction']) + traffic_status
+                                road_dict["number"] = i+1
                         else:
                             for i in range(len(step)):
                                 if step[i].get('duration'):
                                     status = str(int(step[i]['distance'])) + "米|" + str(int(step[i]['duration'])//60) + "分钟"
                                 else:
                                     status = "未知"
-                                road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = status
+                                road_dict[str(i+1)] = self.remove_tags(step[i]['instruction']) + status
+                                road_dict["number"] = i+1
                         attr_dict = {}
                         for key,value in road_dict.items():
                             attr_dict[str(key)] = value
@@ -359,14 +361,16 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
                                     status = step[i]['tmcs'][0]['status'] + "|" + str(float(step[i]['distance'])/1000) + "公里|" + str(int(step[i]['duration'])//60) + "分钟"
                                 else:
                                     status = "未知" + "|" + str(float(step[i]['distance'])/1000) + "公里|" + str(int(step[i]['duration'])//60) + "分钟"
-                                road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = status
+                                road_dict[str(i+1)] = self.remove_tags(step[i]['instruction']) +  status
+                                road_dict["number"] = i+1
                         else:
                             for i in range(len(step)):
                                 if step[i].get('duration'):
                                     status = str(int(step[i]['distance'])) + "米|" + str(int(step[i]['duration'])//60) + "分钟"
                                 else:
                                     status = "未知"
-                                road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = status
+                                road_dict[str(i+1)] = self.remove_tags(step[i]['instruction']) + status
+                                road_dict["number"] = i+1
                         attr_dict = {}
                         for key,value in road_dict.items():
                             attr_dict[str(key)] = value
@@ -403,21 +407,24 @@ class travel_timeDataUpdateCoordinator(DataUpdateCoordinator):
                                     traffic_status = TRAFFIC_STATUS[status] + "|" + str(float(step[i]['distance'])/1000) + "公里"
                                 else:
                                     traffic_status  = '未知' + "|" + str(int(step[i]['distance'])) + "米"
-                                road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = traffic_status
+                                road_dict[str(i+1)] = self.remove_tags(step[i]['instruction']) + traffic_status
+                                road_dict["number"] = i+1
                         elif self.way == '3':
                             for i in range(len(step)):
                                 if step[i].get('distance'):
                                     status = str(float(step[i]['distance'])/1000)+ "公里"
                                 else:
                                     status = '未知'                                
-                                road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = status
+                                road_dict[str(i+1)] = self.remove_tags(step[i]['instruction']) + status
+                                road_dict["number"] = i+1
                         else:
                             for i in range(len(step)):
                                 if step[i].get('distance'):
                                     status = str(int(step[i]['distance'])) + "米"
                                 else:
                                     status = "未知"
-                                road_dict[str(i) + ' - ' + self.remove_tags(step[i]['instruction'])] = status
+                                road_dict[str(i+1)] = self.remove_tags(step[i]['instruction']) + status
+                                road_dict["number"] = i+1
                         attr_dict = {}
                         for key,value in road_dict.items():
                             attr_dict[str(key)] = value
