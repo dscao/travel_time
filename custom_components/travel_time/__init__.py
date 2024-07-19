@@ -5,7 +5,7 @@ Github        : https://github.com/dscao
 Description   : 
 Date          : 2023-11-23
 LastEditors   : dscao
-LastEditTime  : 2024-11-25
+LastEditTime  : 2024-7-19
 '''
 """    
 Component to integrate with travel_time.
@@ -127,10 +127,7 @@ async def async_setup_entry(hass, config_entry) -> bool:
         UNDO_UPDATE_LISTENER: undo_listener,
     }
 
-    for component in PLATFORMS:
-        hass.async_create_task(
-            hass.config_entries.async_forward_entry_setup(config_entry, component)
-        )
+    await hass.config_entries.async_forward_entry_setups(config_entry, PLATFORMS)
 
     return True
 
