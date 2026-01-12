@@ -5,7 +5,7 @@ Github        : https://github.com/dscao
 Description   : 
 Date          : 2023-11-23
 LastEditors   : dscao
-LastEditTime  : 2024-7-19
+LastEditTime  : 2025-1-6
 '''
 """    
 Component to integrate with travel_time.
@@ -16,7 +16,8 @@ https://github.com/dscao/travel_time
 from async_timeout import timeout
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
-from homeassistant.core import HomeAssistant, Config
+from homeassistant.core import HomeAssistant
+from homeassistant.core_config import Config
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from aiohttp.client_exceptions import ClientConnectorError
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
@@ -127,6 +128,10 @@ async def async_setup_entry(hass, config_entry) -> bool:
         UNDO_UPDATE_LISTENER: undo_listener,
     }
 
+    # for component in PLATFORMS:
+        # hass.async_create_task(
+            # hass.config_entries.async_forward_entry_setup(config_entry, component)
+        # )
     await hass.config_entries.async_forward_entry_setups(config_entry, PLATFORMS)
 
     return True
